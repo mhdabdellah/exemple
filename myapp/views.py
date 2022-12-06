@@ -5,21 +5,17 @@ from myapp.models import Vehicule
 
 # Create your views here.
 
-def vehiculedetails(request, vehicule_id):
-    vehicule = Vehicule.objects.get(id = vehicule_id)
-   
-    if request.method=="POST":
-        # vehicule = Vehicule.objects.get(id = id)
-        form = FormVehicule(request.POST or None, instance=vehicule )
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('myapp:details'))
+def vehiculedetails(request, id):
+    vehicule = Vehicule.objects.get(id=id)
+    form = FormVehicule(request.POST or None, instance=vehicule )
+    if form.is_valid():
+        myform = form.save()
+        print('saved form')
     else:
-        form=FormVehicule()
+        print("form not valid !")
 
     context={
       'updateVehiculeForm':form, 
       'vehicule':vehicule,
-    #   'vehiculeDetail': vehiculeDetail
     }
     return render(request, 'myapp/details.html',context)

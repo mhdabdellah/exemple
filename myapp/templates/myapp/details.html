@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,30 +35,44 @@
           </tr>
         </tbody>
       </table>
-      <form method="post" >
-        <input type="hidden" name="id" id="id" required maxlength="20" value="{{vehicule.id}}">
+
+      <form method="POST">
         {% csrf_token %}
-        <input type="hidden" class="form-control"  id="voiture" value="{{vehicule.voiture}}">
-        <input type="hidden" class="form-control"  id="modele" value="{{vehicule.modele}}">
-        <input type="hidden" class="form-control"  id="matercule" value="{{vehicule.matercule}}">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" colspan="2">Changer Employee</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>employee</td>
-                <td>{{ updateVehiculeForm.employee }}</td>
-              </tr>
-            </tbody>
-          </table>
-          <br>
-          <div class="container text-center">
-            <button type="submit" class="btn btn-primary text-center" >Submit</button>
+        <!-- {{updateVehiculeForm|crispy}} -->
+        <div class="d-none d-lg-none d-lg-block">
+            {{ updateVehiculeForm.voiture|as_crispy_field }}
+            {{ updateVehiculeForm.modele|as_crispy_field }}
+            {{ updateVehiculeForm.matercule|as_crispy_field }}
+            
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+              <h6> Changer L'utilisateur Actielle</h6>
+            </div>
+            <div class="col">
+                {{ updateVehiculeForm.employee|as_crispy_field }}
+            </div>
+            <div class="col">
+            </div>
+        </div>
+        
+        <br><br>
+
+        <div class="row align-items-start">
+          <div class="col">
           </div>
-          
+          <div class="col">
+            <div class="mt-6">
+              <button type="submit" class="btn btn-primary p-2 pl-4 pr-4">Add</button>
+            </div>
+          </div>
+          <div class="col">
+          </div>
+      </div>
+        
+
+      </form>
+
       </form>
 </body>
 </html>
