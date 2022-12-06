@@ -9,7 +9,7 @@ def vehiculedetails(request, id):
     vehicule = Vehicule.objects.get(id=id)
     form = FormVehicule(request.POST or None, instance=vehicule )
     if form.is_valid():
-        myform = form.save()
+        form.save()
         print('saved form')
     else:
         print("form not valid !")
