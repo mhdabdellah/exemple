@@ -18,3 +18,18 @@ class Vehicule(models.Model):
 
     def __str__(self):
         return self.voiture
+
+class Historique(models.Model):
+    vehicule = models.ForeignKey(Vehicule, on_delete=models.CASCADE, null=True)
+    date = models.DateField()
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f'''la vehicule {self.vehicule} est utilisée par l'employee 
+                    {self.employee} le {self.date}'''
+
+    def new_historique(self, data):
+        self.vehicule = data['vehicule']
+        self.employee = data['employee']
+        self.date = data['date']
+        self.save()
