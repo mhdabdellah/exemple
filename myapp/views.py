@@ -23,6 +23,7 @@ def vehiculedetails(request, id):
         h.new_historique(data)
         # print("myformData : "+ myformDate.employee)
         print('saved form')
+        return(redirect('/myapp/details/'+str(id)))
     else:
         print("form not valid !")
 
